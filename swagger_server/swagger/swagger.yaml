@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
-  title: Simple Inventory API
-  description: This is a simple API
+  title: Student API
+  description: API for Student and Grades
   contact:
     email: you@your-company.com
   license:
@@ -14,7 +14,7 @@ servers:
 paths:
   /student/{student_id}:
     get:
-      summary: gets student
+      summary: Gets student
       description: Returns a single student
       operationId: get_student_by_id
       parameters:
@@ -25,8 +25,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
-          format: uuid
+          type: integer
       responses:
         "200":
           description: Successful operation
@@ -40,7 +39,7 @@ paths:
           description: Not found
       x-openapi-router-controller: swagger_server.controllers.default_controller
     delete:
-      summary: gets student
+      summary: Deletes student
       description: |
         delete a single student
       operationId: delete_student
@@ -52,8 +51,7 @@ paths:
         style: simple
         explode: false
         schema:
-          type: string
-          format: uuid
+          type: integer
       responses:
         "200":
           description: Successful operation
@@ -67,6 +65,32 @@ paths:
           description: Bad Request
         "404":
           description: Student with specified student_id cannot be found
+      x-openapi-router-controller: swagger_server.controllers.default_controller
+  /student/{student_id}/average_grade:
+    get:
+      summary: Get the average grade of a student
+      description: Returns the average grade of a student
+      operationId: get_average_grade
+      parameters:
+      - name: student_id
+        in: path
+        description: the uid
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: integer
+      responses:
+        "200":
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: number
+                format: float
+                x-content-type: application/json
+        "404":
+          description: Student not found or Student has no grades
       x-openapi-router-controller: swagger_server.controllers.default_controller
   /student:
     post:
@@ -85,8 +109,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                format: uuid
+                type: integer
                 x-content-type: application/json
         "400":
           description: "invalid input, object invalid"
@@ -102,7 +125,7 @@ components:
       type: object
       properties:
         student_id:
-          type: number
+          type: integer
         first_name:
           type: string
         last_name:
@@ -112,7 +135,7 @@ components:
           items:
             $ref: "#/components/schemas/GradeRecord"
       example:
-        student_id: 0.8008281904610115
+        student_id: 0
         last_name: last_name
         grade_records:
         - grade: 6.0274563
