@@ -35,6 +35,19 @@ def delete_student(student_id):  # noqa: E501
     return delete(student_id)
 
 
+def get_average_grade(student_id):  # noqa: E501
+    """Get the average grade of a student
+
+    Returns the average grade of a student # noqa: E501
+
+    :param student_id: the uid
+    :type student_id: int
+
+    :rtype: float
+    """
+    return 'do some magic!'
+
+
 def get_student_by_id(student_id):  # noqa: E501
     """gets student
 
