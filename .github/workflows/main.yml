@@ -10,13 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build docker
+    - name: Build and run with docker-compose (MongoDB + service)
       run: |
-        docker build . -t $REPO_NAME/$IMAGE_NAME
-    - name: run docker
-      run: |
-        docker run -d -p 8080:8080 $REPO_NAME/$IMAGE_NAME:latest && \
-          docker ps && sleep 5
+        docker-compose build service
+        docker-compose up -d
+        docker ps && sleep 10
 
     - name: "Check files existence"
       uses: andstor/file-existence-action@v2

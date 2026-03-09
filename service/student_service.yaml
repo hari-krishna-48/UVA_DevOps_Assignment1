@@ -35,18 +35,18 @@ spec:
         io.kompose.service: service
     spec:
       containers:
-      - env:
-        - name: MONGO_URI
-          value: mongodb://mongo:27017
-        - name: MONGO_DATABASE
-          value: student-db
-        - name: MONGO_COLLECTION
-          value: student
-        image: h4hari2015/student_service
-        name: service
-        imagePullPolicy: Always
-        ports:
-        - containerPort: 8080
-        resources: {}
+        - env:
+            - name: MONGO_URI
+              value: mongodb://mongo:27017
+            - name: MONGO_DATABASE
+              value: student_db
+            - name: MONGO_COLLECTION
+              value: students
+          image: h4hari2015/student_service
+          name: service
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          resources: {}
       restartPolicy: Always
 status: {}
