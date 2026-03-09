@@ -1,0 +1,24 @@
+services:
+  mongo:
+    image: mongo:4
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  student_service:
+    image: h4hari2015/student_service
+    restart: unless-stopped
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DATABASE: student_db
+      MONGO_COLLECTION_NAME: students
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:
