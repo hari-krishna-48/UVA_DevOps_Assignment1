@@ -1,13 +1,15 @@
 services:
   mongo:
     image: mongo:4
+    restart: unless-stopped
     ports:
       - "27017:27017"
     volumes:
       - mongo_data:/data/db
 
-  service:
+  student_service:
     image: h4hari2015/student_service
+    restart: unless-stopped
     build: .
     ports:
       - "8080:8080"
