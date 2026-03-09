@@ -3,7 +3,7 @@ services:
     image: mongo:4
     restart: unless-stopped
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
       - mongo_data:/data/db
 
@@ -16,7 +16,7 @@ services:
     environment:
       MONGO_URI: mongodb://mongo:27017
       MONGO_DATABASE: student_db
-      MONGO_COLLECTION_NAME: students
+      MONGO_COLLECTION: students
     depends_on:
       - mongo
 
