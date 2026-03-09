@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Build and run with docker-compose (MongoDB + service)
+    - name: Build and run with docker compose (MongoDB + service)
       run: |
-        docker-compose build service
-        docker-compose up -d
+        docker compose build service
+        docker compose up -d
         docker ps && sleep 10
 
     - name: "Check files existence"
